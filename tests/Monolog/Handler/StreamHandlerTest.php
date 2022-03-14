@@ -148,9 +148,10 @@ class StreamHandlerTest extends TestCase
         $this->expectExceptionMessage('The stream or file "bogus://url" could not be opened in append mode: Failed to open stream: No such file or directory'."\n".'The exception occurred while attempting to log: test'."\n".'Context: {"foo":"bar"}'."\n".'Extra: [1,2,3]');
 
         $handler = new StreamHandler('bogus://url');
-        $record = $this->getRecord();
-        $record['context'] = ['foo' => 'bar'];
-        $record['extra'] = [1, 2, 3];
+        $record = $this->getRecord(
+            context: ['foo' => 'bar'],
+            extra: [1, 2, 3],
+        );
         $handler->handle($record);
     }
 
